@@ -1,14 +1,17 @@
-﻿namespace ptt_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ptt_api.Models
 {
-    public class DancerDto
+    public class CreateDancerDto
     {
-        public int Id { get; set; }
+        [Required]
+        [MaxLength(25)]
         public string Name { get; set; }
         public string Danceclass { get; set; }
         public int NumberofPoints { get; set; }
         public string ContactNumber { get; set; }
         public string ContactEmail { get; set; }
-        public string DancePartnerName { get; set; }
-        public string DanceClubName { get; set; }
+        public int DanceClubId { get; set; }
+
     }
 }

@@ -42,7 +42,7 @@ namespace ptt_api.Services
         public int Create(CreateDanceClubDto dto)
         {
             var newDanceClub = _danceClubMappingProfile.Map<DanceClub>(dto);
-            _dancersDbContext.Add(newDanceClub);
+            _dancersDbContext.DanceClubs.Add(newDanceClub);
             _dancersDbContext.SaveChanges();
             return newDanceClub.Id;
         }

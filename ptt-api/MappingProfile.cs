@@ -4,9 +4,9 @@ using ptt_api.Models;
 
 namespace ptt_api
 {
-    public class DanceClubMappingProfile : Profile
+    public class MappingProfile : Profile
     {
-        public DanceClubMappingProfile()
+        public MappingProfile()
         {
             CreateMap<DanceClub, DanceClubDto>()
                 .ForMember(a => a.City, c => c.MapFrom(s => s.Address.City))
@@ -19,7 +19,11 @@ namespace ptt_api
                     PostalCode = dto.PostalCode,
                     Street = dto.Street
                 }));
-            CreateMap<Dancer, DancerDto>();
+            
+            CreateMap<Dancer, DancerDto>()
+                .ForMember(a => a.DanceClubName, c => c.MapFrom(s => s.DancerClub.Name));
+
+            CreateMap<CreateDancerDto, Dancer>();
         }
     }
 }
