@@ -8,7 +8,7 @@ namespace ptt_api.Services
         IEnumerable<DanceClubDto> GetAll();
         DanceClubDto GetById(int id);
         int Create(CreateDanceClubDto dto);
-        bool Delete(int id);
-        bool Update(int id, UpdateDanceClubDto dto);
+        void Delete(int id);
+        void Update(int id, UpdateDanceClubDto dto);
     }
 }

@@ -24,8 +24,6 @@ namespace ptt_api.Controllers
         public ActionResult GetById([FromRoute]int id)
         {
             var SearchedClub = _danceClubService.GetById(id);
-            if(SearchedClub == null)
-                return NotFound();
             return Ok(SearchedClub);
         }
         [HttpPost]
@@ -37,17 +35,13 @@ namespace ptt_api.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteDanceCLub([FromRoute]int id)
         {
-            var result = _danceClubService.Delete(id);
-            if (!result)
-                return NotFound();
+           _danceClubService.Delete(id);
             return Ok();
         }
         [HttpPut("{id}")]
         public ActionResult UpdateDanceClub([FromRoute]int id, [FromBody]UpdateDanceClubDto dto)
         {
-            var result = _danceClubService.Update(id, dto);
-            if (!result)
-                return NotFound();
+            _danceClubService.Update(id, dto);
             return Ok("Done");
         }
     }

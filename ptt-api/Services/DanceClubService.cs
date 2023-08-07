@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ptt_api.Entities;
+using ptt_api.Exceptions;
 using ptt_api.Models;
 
 namespace ptt_api.Services
@@ -32,6 +33,8 @@ namespace ptt_api.Services
                 .Include(r => r.Dancers)
                 .Include(r => r.Address)
                 .FirstOrDefault(r => r.Id == id);
+            if(searchedDanceClub is null)
+                throw new NotFoundException("DanceClub not found");
             var searchedDanceClubDto = _danceClubMappingProfile.Map<DanceClubDto>(searchedDanceClub);
             return searchedDanceClubDto;
         }
@@ -44,30 +47,28 @@ namespace ptt_api.Services
             return newDanceClub.Id;
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             var searchedDanceClub = _dancersDbContext
                 .DanceClubs
                 .FirstOrDefault(r => r.Id == id);
             if (searchedDanceClub is null)
-                return false;
+                throw new NotFoundException("DanceClub not found");
             _dancersDbContext.Remove(searchedDanceClub);
             _dancersDbContext.SaveChanges();
-            return true;
         }
 
-        public bool Update(int id, UpdateDanceClubDto dto)
+        public void Update(int id, UpdateDanceClubDto dto)
         {
             var searchedDanceClub = _dancersDbContext
                 .DanceClubs
                 .FirstOrDefault(r => r.Id == id);
             if (searchedDanceClub is null)
-                return false;
+                throw new NotFoundException("DanceClub not found");
             searchedDanceClub.Name = dto.Name;
             searchedDanceClub.Owner = dto.Owner;
             _dancersDbContext.Update(searchedDanceClub);
             _dancersDbContext.SaveChanges();
-            return true;
         }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ptt_api;
 using ptt_api.Entities;
+using ptt_api.Middlewares;
 using ptt_api.Services;
 using System.Reflection;
 
@@ -13,7 +14,7 @@ builder.Services.AddScoped<IDanceClubService, DanceClubService>();
 builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -21,6 +22,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DancersSeeder>();
 seeder.Seed();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
