@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ptt_api.Models;
 using ptt_api.Services;
 
 namespace ptt_api.Controllers
 {
     [Route("danceclub")]
+    [ApiController]
     public class DanceClubController : ControllerBase
     {
         private readonly IDanceClubService _danceClubService;
@@ -25,6 +27,28 @@ namespace ptt_api.Controllers
             if(SearchedClub == null)
                 return NotFound();
             return Ok(SearchedClub);
+        }
+        [HttpPost]
+        public ActionResult CreateDanceClub([FromBody]CreateDanceClubDto dto)
+        {
+            var createdDanceClubId = _danceClubService.Create(dto);
+            return Created($"danceclub/{createdDanceClubId}", null);
+        }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteDanceCLub([FromRoute]int id)
+        {
+            var result = _danceClubService.Delete(id);
+            if (!result)
+                return NotFound();
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public ActionResult UpdateDanceClub([FromRoute]int id, [FromBody]UpdateDanceClubDto dto)
+        {
+            var result = _danceClubService.Update(id, dto);
+            if (!result)
+                return NotFound();
+            return Ok("Done");
         }
     }
 }

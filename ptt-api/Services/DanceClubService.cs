@@ -1,29 +1,73 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ptt_api.Entities;
+using ptt_api.Models;
 
 namespace ptt_api.Services
 {
     public class DanceClubService : IDanceClubService
     {
         private readonly DancersDbContext _dancersDbContext;
+        private readonly IMapper _danceClubMappingProfile;
 
-        public DanceClubService(DancersDbContext dancersDbContext)
+        public DanceClubService(DancersDbContext dancersDbContext, IMapper danceClubMappingProfile)
         {
             _dancersDbContext = dancersDbContext;
+            _danceClubMappingProfile = danceClubMappingProfile;
         }
-        public IEnumerable<DanceClub> GetAll()
+        public IEnumerable<DanceClubDto> GetAll()
         {
             var danceclubs = _dancersDbContext
                 .DanceClubs
+                .Include(r => r.Dancers)
+                .Include(r => r.Address)
                 .ToList();
-            return danceclubs;
+            var danceclubsDto = _danceClubMappingProfile.Map<List<DanceClubDto>>(danceclubs);
+            return danceclubsDto;
         }
-        public DanceClub GetById(int id)
+        public DanceClubDto GetById(int id)
         {
-            var searchedDanceCloub = _dancersDbContext
+            var searchedDanceClub = _dancersDbContext
+                .DanceClubs
+                .Include(r => r.Dancers)
+                .Include(r => r.Address)
+                .FirstOrDefault(r => r.Id == id);
+            var searchedDanceClubDto = _danceClubMappingProfile.Map<DanceClubDto>(searchedDanceClub);
+            return searchedDanceClubDto;
+        }
+
+        public int Create(CreateDanceClubDto dto)
+        {
+            var newDanceClub = _danceClubMappingProfile.Map<DanceClub>(dto);
+            _dancersDbContext.Add(newDanceClub);
+            _dancersDbContext.SaveChanges();
+            return newDanceClub.Id;
+        }
+
+        public bool Delete(int id)
+        {
+            var searchedDanceClub = _dancersDbContext
                 .DanceClubs
                 .FirstOrDefault(r => r.Id == id);
-            return searchedDanceCloub;
+            if (searchedDanceClub is null)
+                return false;
+            _dancersDbContext.Remove(searchedDanceClub);
+            _dancersDbContext.SaveChanges();
+            return true;
+        }
+
+        public bool Update(int id, UpdateDanceClubDto dto)
+        {
+            var searchedDanceClub = _dancersDbContext
+                .DanceClubs
+                .FirstOrDefault(r => r.Id == id);
+            if (searchedDanceClub is null)
+                return false;
+            searchedDanceClub.Name = dto.Name;
+            searchedDanceClub.Owner = dto.Owner;
+            _dancersDbContext.Update(searchedDanceClub);
+            _dancersDbContext.SaveChanges();
+            return true;
         }
     }
 }

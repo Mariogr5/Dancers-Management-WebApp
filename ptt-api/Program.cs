@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ptt_api;
 using ptt_api.Entities;
 using ptt_api.Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IDanceClubService, DanceClubService>();
 builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 
 var app = builder.Build();
 
