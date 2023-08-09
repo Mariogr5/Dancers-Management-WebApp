@@ -10,6 +10,7 @@ namespace ptt_api.Models
         public string Danceclass { get; set; }
         public int NumberofPoints { get; set; }
         public string ContactNumber { get; set; }
+        [EmailAddress]
         public string ContactEmail { get; set; }
         public int DanceClubId { get; set; }
 

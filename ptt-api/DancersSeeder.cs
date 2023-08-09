@@ -21,6 +21,12 @@ namespace ptt_api
                     _dbContext.DanceClubs.AddRange(danceclubs);
                     _dbContext.SaveChanges();
                 }
+                if(!_dbContext.DanceEvents.Any())
+                {
+                    var danceevents = GetDanceEvents();
+                    _dbContext.DanceEvents.AddRange(danceevents);
+                    _dbContext.SaveChanges();
+                }
             }
             
         }
@@ -43,6 +49,7 @@ namespace ptt_api
                             DancePartnerName = "Barbie",
                             ContactEmail = "goracymeo@gmail.com",
                             ContactNumber="000000111",
+                            
 
                         },
 
@@ -54,6 +61,7 @@ namespace ptt_api
                             DancePartnerName = "Mionel Lessi",
                             ContactEmail = "fajnabarbie@gmail.com",
                             ContactNumber="000000113",
+                            
 
                         }
 
@@ -67,6 +75,58 @@ namespace ptt_api
                 }
             };
             return danceclubs;
+        }
+
+        private IEnumerable<DanceEvent> GetDanceEvents()
+        {
+            var danceEvents = new List<DanceEvent>()
+            {
+                new DanceEvent()
+                {
+                    Name="Tańce po hulajnodze",
+                    Description = "Będziemy tańczyć i jezdzić na hulajnodze",
+                    Organizer = "Czerwony Kapturek",
+                    City = "Olesno",
+                    EmailAdress = "kaptur@gmail.com",
+                    Date = new DateTime(2012, 12, 25, 10, 30, 50),
+                    DanceCompetitionCategories = new List<DanceCompetitionCategory>()
+                    {
+                        new DanceCompetitionCategory()
+                        {
+                            AgeRange = "14-15",
+                            CategoryDanceClass = "B",
+                            ListofPairs = new List<DancePair>()
+                            {
+                                new DancePair("Jaś Fasola","Zosia Kłosia","B",0,"Oborniki Wrocław")
+                            }
+                        }
+                    }
+
+                },
+                new DanceEvent()
+                {
+                    Name="Tańce po hulajnodze",
+                    Description = "Będziemy tańczyć i jezdzić na hulajnodze",
+                    Organizer = "Czerwony Kapturek",
+                    City = "Olesno",
+                    EmailAdress = "kaptur@gmail.com",
+                    Date = new DateTime(2012, 10, 15, 9, 30, 50),
+                    DanceCompetitionCategories = new List<DanceCompetitionCategory>()
+                    {
+                        new DanceCompetitionCategory()
+                        {
+                            AgeRange = "14-15",
+                            CategoryDanceClass = "B",
+                            ListofPairs = new List<DancePair>()
+                            {
+                                new DancePair("Jaś Fasole","Zosia Kłosia","B",0,"Oborniki Wrocław")
+                            }
+                        }
+                    }
+
+                }
+            };
+            return danceEvents;
         }
     }
 }

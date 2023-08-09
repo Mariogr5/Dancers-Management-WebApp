@@ -86,8 +86,10 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dancepartner not found");
             dancer.DancePartnerName = dancePartner.Name;
             dancePartner.DancePartnerName = dancer.Name;
+            var newPair = new DancePair(dancer.Name, dancePartner.Name, dancer.Danceclass, (dancer.NumberofPoints + dancePartner.NumberofPoints)/2, dancer.DancerClub.Name);
             _dancersDbContext.Update(dancer);
             _dancersDbContext.Update(dancePartner);
+            _dancersDbContext.DancePairs.Add(newPair);
             _dancersDbContext.SaveChanges();
         }
 

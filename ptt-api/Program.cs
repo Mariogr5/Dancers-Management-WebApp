@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NLog.Web;
 using ptt_api;
 using ptt_api.Entities;
 using ptt_api.Middlewares;
@@ -8,10 +9,11 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Host.UseNLog();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IDanceClubService, DanceClubService>();
 builder.Services.AddScoped<IDancerService, DancerService>();
+builder.Services.AddScoped<IDanceEventService, DanceEventService>();
 builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

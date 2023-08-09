@@ -11,7 +11,5 @@
         public string DancePartnerName { get; set; }
         public int DanceClubId { get; set; }
         public virtual DanceClub DancerClub{get;set;}
-
-
     }
 }

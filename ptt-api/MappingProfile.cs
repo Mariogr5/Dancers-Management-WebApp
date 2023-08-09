@@ -24,6 +24,10 @@ namespace ptt_api
                 .ForMember(a => a.DanceClubName, c => c.MapFrom(s => s.DancerClub.Name));
 
             CreateMap<CreateDancerDto, Dancer>();
+
+            CreateMap<DanceEvent, DanceEventDto>();
+            CreateMap<DanceCompetitionCategory, DanceCompetitionCategoryDto>();
+            CreateMap<DancePair, DancePairDto>();
         }
     }
 }

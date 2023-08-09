@@ -10,11 +10,13 @@ namespace ptt_api.Services
     {
         private readonly DancersDbContext _dancersDbContext;
         private readonly IMapper _danceClubMappingProfile;
+        private readonly ILogger<DanceClubService> _logger;
 
-        public DanceClubService(DancersDbContext dancersDbContext, IMapper danceClubMappingProfile)
+        public DanceClubService(DancersDbContext dancersDbContext, IMapper danceClubMappingProfile, ILogger<DanceClubService> logger)
         {
             _dancersDbContext = dancersDbContext;
             _danceClubMappingProfile = danceClubMappingProfile;
+            _logger = logger;
         }
         public IEnumerable<DanceClubDto> GetAll()
         {
@@ -41,14 +43,17 @@ namespace ptt_api.Services
 
         public int Create(CreateDanceClubDto dto)
         {
+            
             var newDanceClub = _danceClubMappingProfile.Map<DanceClub>(dto);
             _dancersDbContext.DanceClubs.Add(newDanceClub);
             _dancersDbContext.SaveChanges();
+            _logger.LogError($"CREATE DanceClub action invoked, new DanceClub Id: {newDanceClub.Id}");
             return newDanceClub.Id;
         }
 
         public void Delete(int id)
         {
+            _logger.LogError($"DanceClub with id: {id} DELETE action invoked");
             var searchedDanceClub = _dancersDbContext
                 .DanceClubs
                 .FirstOrDefault(r => r.Id == id);
@@ -60,6 +65,7 @@ namespace ptt_api.Services
 
         public void Update(int id, UpdateDanceClubDto dto)
         {
+            _logger.LogError($"DanceClub with id: {id} Update action invoked");
             var searchedDanceClub = _dancersDbContext
                 .DanceClubs
                 .FirstOrDefault(r => r.Id == id);

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sRnKK9VSVbC6f864AniA8x1eYycYzshwPAEkEWLO77VDi+QUfX07vNl2lk5afa8TfazLd24FjuYtpQlzGGZLCw==",
+  "dgSpecHash": "MwFxzvTEnlr2I961sGAXuWX5Fk+OUiWXrJv7csucVSAb5PDgkuQSxP6tTBHLzIzi9b9fQt8TNNAYv6QBamOoUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\mario\\Desktop\\WebApi training\\Dancers-Management-WebApp\\ptt-api\\ptt-api.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,9 @@
     "C:\\Users\\mario\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\nlog\\5.2.3\\nlog.5.2.3.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\nlog.extensions.logging\\5.3.3\\nlog.extensions.logging.5.3.3.nupkg.sha512",
+    "C:\\Users\\mario\\.nuget\\packages\\nlog.web.aspnetcore\\5.3.3\\nlog.web.aspnetcore.5.3.3.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\mario\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",

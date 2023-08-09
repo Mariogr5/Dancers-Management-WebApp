@@ -154,3 +154,7 @@ C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\obj\Deb
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\obj\Debug\net6.0\ptt-api.pdb
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\obj\Debug\net6.0\ptt-api.genruntimeconfig.cache
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\obj\Debug\net6.0\ref\ptt-api.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\nlog.config
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\NLog.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\NLog.Web.AspNetCore.dll

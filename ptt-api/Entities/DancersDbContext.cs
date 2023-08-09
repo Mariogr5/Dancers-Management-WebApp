@@ -11,6 +11,10 @@ namespace ptt_api.Entities
         public DbSet<Address> Addresses { get; set; }
         public DbSet<DanceClub> DanceClubs { get; set; }
 
+        public DbSet<DancePair> DancePairs { get; set; }
+        public DbSet<DanceCompetitionCategory> DanceCompetitionCategories { get; set; }
+        public DbSet<DanceEvent> DanceEvents { get; set; }
+
         
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +29,20 @@ namespace ptt_api.Entities
             modelBuilder.Entity<Dancer>()
                 .Property(r => r.Danceclass)
                 .HasDefaultValue("H");
+            modelBuilder.Entity<DanceEvent>()
+                .Property(r => r.Name)
+                .IsRequired();
+
+                
+            //modelBuilder.Entity<DancePair>()
+            //    .HasOne(w => w.Dancer)
+            //    .WithMany()
+            //    .HasForeignKey(w => w.DancerId);
+            //modelBuilder.Entity<DancePair>()
+            //    .HasOne(w => w.DancePartner)
+            //    .WithMany()
+            //    .HasForeignKey(r => r.DanceParnterId);
+
         }
         
         

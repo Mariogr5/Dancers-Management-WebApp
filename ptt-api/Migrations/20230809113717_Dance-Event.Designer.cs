@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ptt_api.Entities;
 
@@ -11,9 +12,11 @@ using ptt_api.Entities;
 namespace ptt_api.Migrations
 {
     [DbContext(typeof(DancersDbContext))]
-    partial class DancersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809113717_Dance-Event")]
+    partial class DanceEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
