@@ -11,5 +11,6 @@ namespace ptt_api.Services
         int CreateDancer(int DanceClubId, CreateDancerDto dto);
         void Delete(int id);
         void PairtheDancers(int id, int PartnerId);
+        void ChangeDancerClub(int id, int danceClubId);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ptt_api.Entities;
 using ptt_api.Exceptions;
 using ptt_api.Models;
+using System.Data;
 
 namespace ptt_api.Services
 {
@@ -86,12 +87,44 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dancepartner not found");
             dancer.DancePartnerName = dancePartner.Name;
             dancePartner.DancePartnerName = dancer.Name;
-            var newPair = new DancePair(dancer.Name, dancePartner.Name, dancer.Danceclass, (dancer.NumberofPoints + dancePartner.NumberofPoints)/2, dancer.DancerClub.Name);
+            //DancePair newPair;
+           // var newPair = new DancePair()
+           // {
+           //     DancePairClubName = dancer.DancerClub.Name,
+           //     DancePartnerName = dancePartner.Name,
+           //     PairDanceClass = dancer.Danceclass,
+           //     PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints) / 2,
+           //     DancerName = dancer.Name,
+           // };
             _dancersDbContext.Update(dancer);
             _dancersDbContext.Update(dancePartner);
-            _dancersDbContext.DancePairs.Add(newPair);
+            //_dancersDbContext.DancePairs.Add(newPair);
             _dancersDbContext.SaveChanges();
         }
-
+        public void ChangeDancerClub(int id, int danceClubId)
+        {
+            var dancer = _dancersDbContext
+                .Dancers
+                .FirstOrDefault(r => r.Id==id);
+            var danceclub = _dancersDbContext
+                .DanceClubs
+                .FirstOrDefault(r => r.Id == danceClubId);
+            if (dancer is null)
+                throw new NotFoundException("Dancer not found");
+            if (danceclub is null)
+                throw new NotFoundException("Dance Club not found");
+            if (dancer.DancePartnerName != null)
+            {
+                var dancePartner = _dancersDbContext
+                    .Dancers
+                    .FirstOrDefault(r => r.Name == dancer.DancePartnerName);
+                dancer.DancePartnerName = "none";
+                dancePartner.DancePartnerName = "none";
+                _dancersDbContext.Update(dancePartner);
+            }
+            dancer.DanceClubId = danceClubId;
+            _dancersDbContext.Update(dancer);
+            _dancersDbContext.SaveChanges();
+        }
     }
 }

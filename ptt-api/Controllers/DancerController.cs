@@ -50,5 +50,11 @@ namespace ptt_api.Controllers
             _dancerService.PairtheDancers(id, PartnerId);
             return Ok("Done");
         }
+        [HttpPut("{id}/newclub/{danceClubId}")]
+        public ActionResult ChangeDancerClub([FromRoute]int id, [FromRoute]int danceClubId)
+        {
+            _dancerService.ChangeDancerClub(id, danceClubId);
+            return Ok();
+        }
     }
 }

@@ -5,5 +5,8 @@ namespace ptt_api.Services
     public interface IDanceEventService
     {
         IEnumerable<DanceEventDto> GetAll();
+        DanceEventDto GetById(int id);
+        int CreateDanceEvent(CreateDanceEventDto dto);
+        void DeleteDanceEvent(int id);
     }
 }

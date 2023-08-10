@@ -4,13 +4,13 @@ namespace ptt_api.Entities
 {
     public class DancePair
     {
-        public DancePair(string dancerName, string dancePartnerName, string pairDanceClass, int PairNumberofPoints, string DancePairClubName)
+        public DancePair(string dancerName, string dancePartnerName, string pairDanceClass, int pairNumberofPoints, string dancePairClubName)
         {
             this.DancerName = dancerName;
             this.DancePartnerName = dancePartnerName;
             this.PairDanceClass = pairDanceClass;
-            this.PairNumberofPoints = PairNumberofPoints;
-            this.DancePairClubName = DancePairClubName;
+            this.PairNumberofPoints = pairNumberofPoints;
+            this.DancePairClubName = dancePairClubName;
         }
         public int Id { get; set; }
         public string DancerName { get; set; }

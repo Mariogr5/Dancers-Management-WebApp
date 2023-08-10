@@ -18,6 +18,7 @@ builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
@@ -28,7 +29,11 @@ var seeder = scope.ServiceProvider.GetRequiredService<DancersSeeder>();
 seeder.Seed();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
-
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ptt api");
+});
 app.UseAuthorization();
 
 app.MapControllers();
