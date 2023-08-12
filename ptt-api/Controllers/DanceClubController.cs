@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ptt_api.Models;
 using ptt_api.Services;
 
@@ -6,6 +7,7 @@ namespace ptt_api.Controllers
 {
     [Route("danceclub")]
     [ApiController]
+    [Authorize]
     public class DanceClubController : ControllerBase
     {
         private readonly IDanceClubService _danceClubService;
@@ -15,18 +17,21 @@ namespace ptt_api.Controllers
             _danceClubService = danceClubService;
         }
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult GetAll()
         {
             var DanceClubs = _danceClubService.GetAll();
             return Ok(DanceClubs);
         }
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public ActionResult GetById([FromRoute]int id)
         {
             var SearchedClub = _danceClubService.GetById(id);
             return Ok(SearchedClub);
         }
         [HttpPost]
+        [Authorize]
         public ActionResult CreateDanceClub([FromBody]CreateDanceClubDto dto)
         {
             var createdDanceClubId = _danceClubService.Create(dto);
@@ -39,6 +44,7 @@ namespace ptt_api.Controllers
             return Ok();
         }
         [HttpPut("{id}")]
+        
         public ActionResult UpdateDanceClub([FromRoute]int id, [FromBody]UpdateDanceClubDto dto)
         {
             _danceClubService.Update(id, dto);

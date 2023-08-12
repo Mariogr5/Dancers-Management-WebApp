@@ -12,6 +12,7 @@ namespace ptt_api.Entities
             this.PairNumberofPoints = pairNumberofPoints;
             this.DancePairClubName = dancePairClubName;
         }
+        public DancePair() { }
         public int Id { get; set; }
         public string DancerName { get; set; }
         public string DancePartnerName { get; set; }

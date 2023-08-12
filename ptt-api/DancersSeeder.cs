@@ -1,4 +1,5 @@
 ﻿using ptt_api.Entities;
+using ptt_api.Entities;
 
 namespace ptt_api
 {
@@ -25,6 +26,12 @@ namespace ptt_api
                 {
                     var danceevents = GetDanceEvents();
                     _dbContext.DanceEvents.AddRange(danceevents);
+                    _dbContext.SaveChanges();
+                }
+                if (!_dbContext.Roles.Any())
+                {
+                    var roles = GetRoles();
+                    _dbContext.Roles.AddRange(roles);
                     _dbContext.SaveChanges();
                 }
             }
@@ -127,6 +134,27 @@ namespace ptt_api
                 }
             };
             return danceEvents;
+        }
+
+        private IEnumerable<Role> GetRoles()
+        {
+            var roles = new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "Dancer"
+                },
+                new Role()
+                {
+                    Name = "Trainer"
+                },
+                new Role()
+                {
+                    Name = "Admin"
+                }
+            };
+
+            return roles;
         }
     }
 }

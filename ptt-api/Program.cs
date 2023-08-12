@@ -1,25 +1,54 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
 using ptt_api;
 using ptt_api.Entities;
 using ptt_api.Middlewares;
+using ptt_api.Models;
+using ptt_api.Models.Validators;
 using ptt_api.Services;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Host.UseNLog();
-builder.Services.AddControllers();
+var authenticationSettings = new AuthenticationSettings();
+builder.Configuration.GetSection("Authentication").Bind(authenticationSettings); //nazwa taka sama jak w naszym jsonie
+builder.Services.AddSingleton(authenticationSettings);
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(cfg =>
+{
+    cfg.RequireHttpsMetadata = false;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
+    };
+});
+builder.Services.AddControllers().AddFluentValidation();
 builder.Services.AddScoped<IDanceClubService, DanceClubService>();
 builder.Services.AddScoped<IDancerService, DancerService>();
 builder.Services.AddScoped<IDanceEventService, DanceEventService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserValidator>();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
@@ -28,6 +57,7 @@ var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DancersSeeder>();
 seeder.Seed();
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseSwagger();
 app.UseSwaggerUI(c =>

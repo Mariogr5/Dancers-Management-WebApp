@@ -5,6 +5,7 @@ using ptt_api.Services;
 namespace ptt_api.Controllers
 {
     [Route("danceevent")]
+    [ApiController]
     public class DanceEventsController : ControllerBase
     {
         private readonly IDanceEventService _danceEventService;

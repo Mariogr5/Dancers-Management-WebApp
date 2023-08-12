@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ptt_api.Entities;
 using ptt_api.Exceptions;
 using ptt_api.Models;
-//using DanceEvent = ptt_api.Entities.DanceEvent;
 
 namespace ptt_api.Services
 {

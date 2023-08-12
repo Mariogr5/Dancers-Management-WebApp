@@ -163,3 +163,7 @@ C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Deb
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\obj\Debug\net6.0\ptt-api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\mario\Desktop\WebApi training\Dancers-Management-WebApp\ptt-api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

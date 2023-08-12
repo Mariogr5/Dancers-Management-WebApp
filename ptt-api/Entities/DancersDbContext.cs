@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ptt_api.Entities;
 
 namespace ptt_api.Entities
 {
@@ -15,8 +16,8 @@ namespace ptt_api.Entities
         public DbSet<DanceCompetitionCategory> DanceCompetitionCategories { get; set; }
         public DbSet<DanceEvent> DanceEvents { get; set; }
 
-        
-        
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Dancer>()
@@ -33,15 +34,12 @@ namespace ptt_api.Entities
                 .Property(r => r.Name)
                 .IsRequired();
 
-                
-            //modelBuilder.Entity<DancePair>()
-            //    .HasOne(w => w.Dancer)
-            //    .WithMany()
-            //    .HasForeignKey(w => w.DancerId);
-            //modelBuilder.Entity<DancePair>()
-            //    .HasOne(w => w.DancePartner)
-            //    .WithMany()
-            //    .HasForeignKey(r => r.DanceParnterId);
+            modelBuilder.Entity<User>()
+                .Property(r => r.ContactEmail)
+                .IsRequired();
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Name)
+                .IsRequired();
 
         }
         

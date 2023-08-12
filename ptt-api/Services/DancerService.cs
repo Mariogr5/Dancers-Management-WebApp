@@ -93,12 +93,12 @@ namespace ptt_api.Services
            //     DancePairClubName = dancer.DancerClub.Name,
            //     DancePartnerName = dancePartner.Name,
            //     PairDanceClass = dancer.Danceclass,
-           //     PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints) / 2,
+           //     PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints),
            //     DancerName = dancer.Name,
            // };
             _dancersDbContext.Update(dancer);
             _dancersDbContext.Update(dancePartner);
-            //_dancersDbContext.DancePairs.Add(newPair);
+            //_dancersDbContext.DancePairs.Add(new DancePair() { DancePairClubName = dancer.DancerClub.Name, DancePartnerName = dancePartner.Name, PairDanceClass = dancer.Danceclass, PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints), DancerName = dancer.Name});
             _dancersDbContext.SaveChanges();
         }
         public void ChangeDancerClub(int id, int danceClubId)
