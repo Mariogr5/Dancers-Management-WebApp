@@ -6,5 +6,6 @@ namespace ptt_api.Services
     {
         void RegisterUser(RegisterUserDto dto);
         string GenerateJwtToken(LoginDto dto);
+        void AssignRole(int userid, int roleid);
     }
 }

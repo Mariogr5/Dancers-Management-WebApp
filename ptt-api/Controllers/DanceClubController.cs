@@ -31,20 +31,21 @@ namespace ptt_api.Controllers
             return Ok(SearchedClub);
         }
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult CreateDanceClub([FromBody]CreateDanceClubDto dto)
         {
             var createdDanceClubId = _danceClubService.Create(dto);
             return Created($"danceclub/{createdDanceClubId}", null);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult DeleteDanceCLub([FromRoute]int id)
         {
            _danceClubService.Delete(id);
             return Ok();
         }
         [HttpPut("{id}")]
-        
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult UpdateDanceClub([FromRoute]int id, [FromBody]UpdateDanceClubDto dto)
         {
             _danceClubService.Update(id, dto);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ptt_api.Models;
 using ptt_api.Services;
 
@@ -26,6 +27,14 @@ namespace ptt_api.Controllers
         {
             string token = _accountService.GenerateJwtToken(dto);
             return Ok(token);
+        }
+
+        [HttpPut("{userid}/role/{roleid}")]
+        [Authorize(Roles ="Admin")]
+        public ActionResult AssignRole([FromRoute]int userid, [FromRoute]int roleid)
+        {
+            _accountService.AssignRole(userid, roleid);
+            return Ok();
         }
     }
 }

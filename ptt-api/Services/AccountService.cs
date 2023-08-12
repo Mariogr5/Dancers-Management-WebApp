@@ -67,5 +67,24 @@ namespace ptt_api.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
         }
+
+        public void AssignRole(int userid, int roleid)
+        {
+            var user = _context
+                .Users
+                .FirstOrDefault(u => u.Id == userid);
+            if (user is null)
+                throw new NotFoundException("User not found");
+            var role =
+                _context
+                .Roles
+                .FirstOrDefault(u => u.Id == roleid);
+            if (role is null)
+                throw new BadRequestException("False Role");
+            user.RoleId = roleid;
+            _context.Update(user);
+            _context.SaveChanges();
+
+        }
     }
 }

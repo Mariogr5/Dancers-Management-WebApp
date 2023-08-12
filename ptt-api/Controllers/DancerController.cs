@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ptt_api.Models;
 using ptt_api.Services;
 
@@ -33,24 +34,28 @@ namespace ptt_api.Controllers
             return Ok(searchedDancers);
         }
         [HttpPost("danceclub/{DanceClubId}")]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult CreateDancer([FromRoute]int DanceClubId, [FromBody]CreateDancerDto dto)
         {
             var createdDancerId = _dancerService.CreateDancer(DanceClubId,dto);
             return Created("danceclub/dancer/{createdDancerId}", null);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult DeleteDancer([FromRoute]int id)
         {
             _dancerService.Delete(id);
             return Ok();
         }
         [HttpPut("{id}/dancepartner/{PartnerId}")]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult PairtheDancers(int id, int PartnerId)
         {
             _dancerService.PairtheDancers(id, PartnerId);
             return Ok("Done");
         }
         [HttpPut("{id}/newclub/{danceClubId}")]
+        [Authorize(Roles = "Trainer,Admin")]
         public ActionResult ChangeDancerClub([FromRoute]int id, [FromRoute]int danceClubId)
         {
             _dancerService.ChangeDancerClub(id, danceClubId);
