@@ -12,6 +12,10 @@ using ptt_api.Models.Validators;
 using ptt_api.Services;
 using System.Reflection;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,12 +54,25 @@ builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserValidator>();
 builder.Services.AddSwaggerGen();
 
+// Allow frontend requests 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<DancersSeeder>();
 seeder.Seed();
+app.UseCors();
+app.UseRouting();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
 app.UseHttpsRedirection();
