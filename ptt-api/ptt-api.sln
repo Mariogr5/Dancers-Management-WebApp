@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ptt-api", "ptt-api.csproj", "{773AD5A0-03A8-497E-8A97-D2213FA9DEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ptt-api", "ptt-api.csproj", "{773AD5A0-03A8-497E-8A97-D2213FA9DEBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ptt-api.Tests", "..\ptt-api.Tests\ptt-api.Tests.csproj", "{F4F57E60-50E4-4358-9759-FE302BEE0DDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{773AD5A0-03A8-497E-8A97-D2213FA9DEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{773AD5A0-03A8-497E-8A97-D2213FA9DEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{773AD5A0-03A8-497E-8A97-D2213FA9DEBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4F57E60-50E4-4358-9759-FE302BEE0DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4F57E60-50E4-4358-9759-FE302BEE0DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4F57E60-50E4-4358-9759-FE302BEE0DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4F57E60-50E4-4358-9759-FE302BEE0DDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
