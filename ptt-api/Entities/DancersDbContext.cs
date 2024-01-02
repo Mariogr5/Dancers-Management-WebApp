@@ -30,6 +30,15 @@ namespace ptt_api.Entities
             modelBuilder.Entity<Dancer>()
                 .Property(r => r.Danceclass)
                 .HasDefaultValue("H");
+            modelBuilder.Entity<DancePair>()
+                .HasKey(r => r.Id);
+
+            modelBuilder.Entity<DancePair>()
+                .Property(r => r.DancePartnerId)
+                .IsRequired();
+            modelBuilder.Entity<DancePair>()
+                .Property(r => r.DancerId)
+                .IsRequired();
             modelBuilder.Entity<DanceEvent>()
                 .Property(r => r.Name)
                 .IsRequired();

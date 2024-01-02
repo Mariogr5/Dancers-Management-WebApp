@@ -22,53 +22,6 @@ namespace ptt_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RestaurantAPI.Entities.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("RestaurantAPI.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ContactEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("ptt_api.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -194,16 +147,22 @@ namespace ptt_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DanceCompetitionCategoryId")
+                    b.Property<int>("DanceCompetitionCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("DancePairClubName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DancePartnerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DancePartnerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DancerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("DancerName")
                         .IsRequired()
@@ -267,15 +226,51 @@ namespace ptt_api.Migrations
                     b.ToTable("Dancers");
                 });
 
-            modelBuilder.Entity("RestaurantAPI.Entities.User", b =>
+            modelBuilder.Entity("ptt_api.Entities.Role", b =>
                 {
-                    b.HasOne("RestaurantAPI.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Role");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("ptt_api.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ptt_api.Entities.DanceClub", b =>
@@ -302,9 +297,13 @@ namespace ptt_api.Migrations
 
             modelBuilder.Entity("ptt_api.Entities.DancePair", b =>
                 {
-                    b.HasOne("ptt_api.Entities.DanceCompetitionCategory", null)
+                    b.HasOne("ptt_api.Entities.DanceCompetitionCategory", "DanceCompetitionCategory")
                         .WithMany("ListofPairs")
-                        .HasForeignKey("DanceCompetitionCategoryId");
+                        .HasForeignKey("DanceCompetitionCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DanceCompetitionCategory");
                 });
 
             modelBuilder.Entity("ptt_api.Entities.Dancer", b =>
@@ -316,6 +315,17 @@ namespace ptt_api.Migrations
                         .IsRequired();
 
                     b.Navigation("DancerClub");
+                });
+
+            modelBuilder.Entity("ptt_api.Entities.User", b =>
+                {
+                    b.HasOne("ptt_api.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("ptt_api.Entities.Address", b =>

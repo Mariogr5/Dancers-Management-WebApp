@@ -25,15 +25,8 @@ namespace ptt_api.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody]LoginDto dto)
         {
-            try
-            {
                 string token = _accountService.GenerateJwtToken(dto);
                 return Ok(token);
-            }
-            catch
-            {
-                return BadRequest();
-            }
         }
 
         [HttpPut("{userid}/role/{roleid}")]

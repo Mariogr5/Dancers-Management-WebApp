@@ -46,6 +46,7 @@ builder.Services.AddScoped<IDanceClubService, DanceClubService>();
 builder.Services.AddScoped<IDancerService, DancerService>();
 builder.Services.AddScoped<IDanceEventService, DanceEventService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IDancePairService, DancePairService>();
 builder.Services.AddDbContext<DancersDbContext>();
 builder.Services.AddScoped<DancersSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -59,7 +60,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:3000")
+        builder.WithOrigins("http://localhost:7234")
                .AllowAnyHeader()
                .AllowAnyMethod();
     });

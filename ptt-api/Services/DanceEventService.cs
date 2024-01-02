@@ -22,6 +22,7 @@ namespace ptt_api.Services
             var danceEvents = _dbContext
                 .DanceEvents
                 .Include(r =>r.DanceCompetitionCategories)
+                    .ThenInclude(r => r.ListofPairs)
                 .OrderBy(x => x.Date)
                 .ToList();
             var danceEventsDto = _mapper.Map<IEnumerable<DanceEventDto>>(danceEvents);
