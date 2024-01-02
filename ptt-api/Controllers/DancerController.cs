@@ -48,7 +48,8 @@ namespace ptt_api.Controllers
             return Ok();
         }
         [HttpPut("{id}/dancepartner/{PartnerId}")]
-        [Authorize(Roles = "Trainer,Admin")]
+        [HttpPost]
+        //[Authorize(Roles = "Trainer,Admin")]
         public ActionResult PairtheDancers(int id, int PartnerId)
         {
             _dancerService.PairtheDancers(id, PartnerId);

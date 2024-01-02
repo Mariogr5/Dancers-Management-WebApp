@@ -22,8 +22,8 @@ namespace ptt_api.Entities
         public int PairNumberofPoints { get; set; }
         public string DancePairClubName { get; set; }
 
-        public int DanceCompetitionCategoryId { get; set; }
+        public int? DanceCompetitionCategoryId { get; set; }
 
-        public virtual DanceCompetitionCategory DanceCompetitionCategory { get; set; }
+        public virtual DanceCompetitionCategory? DanceCompetitionCategory { get; set; }
     }
 }
