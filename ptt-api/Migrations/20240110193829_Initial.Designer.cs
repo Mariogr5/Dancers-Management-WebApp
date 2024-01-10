@@ -12,8 +12,8 @@ using ptt_api.Entities;
 namespace ptt_api.Migrations
 {
     [DbContext(typeof(DancersDbContext))]
-    [Migration("20240102194635_DancePairUpdate4")]
-    partial class DancePairUpdate4
+    [Migration("20240110193829_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,20 +289,19 @@ namespace ptt_api.Migrations
 
             modelBuilder.Entity("ptt_api.Entities.DanceCompetitionCategory", b =>
                 {
-                    b.HasOne("ptt_api.Entities.DanceEvent", "DanceEvent")
+                    b.HasOne("ptt_api.Entities.DanceEvent", null)
                         .WithMany("DanceCompetitionCategories")
                         .HasForeignKey("DanceEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("DanceEvent");
                 });
 
             modelBuilder.Entity("ptt_api.Entities.DancePair", b =>
                 {
                     b.HasOne("ptt_api.Entities.DanceCompetitionCategory", "DanceCompetitionCategory")
                         .WithMany("ListofPairs")
-                        .HasForeignKey("DanceCompetitionCategoryId");
+                        .HasForeignKey("DanceCompetitionCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("DanceCompetitionCategory");
                 });

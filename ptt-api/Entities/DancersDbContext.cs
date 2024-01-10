@@ -42,6 +42,19 @@ namespace ptt_api.Entities
             modelBuilder.Entity<DanceEvent>()
                 .Property(r => r.Name)
                 .IsRequired();
+            modelBuilder.Entity<DancePair>()
+                .HasOne(r => r.DanceCompetitionCategory)
+                .WithMany(r => r.ListofPairs)
+                .HasForeignKey(r => r.DanceCompetitionCategoryId)
+                .OnDelete(DeleteBehavior.SetNull);
+            //modelBuilder.Entity<DanceCompetitionCategory>()
+            //    .HasOne(r => r.DanceEvent)
+            //    .WithMany(r => r.DanceCompetitionCategories)
+            //    .HasForeignKey(r => r.DanceEventId);
+            
+
+
+
 
             modelBuilder.Entity<User>()
                 .Property(r => r.ContactEmail)

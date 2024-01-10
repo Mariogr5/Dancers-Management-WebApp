@@ -9,7 +9,7 @@ namespace ptt_api.Entities
         public string Description { get; set; }
         public string Organizer { get; set; }
         public bool IsCompetition { get; set; }
-        public List<DanceCompetitionCategory>? DanceCompetitionCategories { get; set; } = new List<DanceCompetitionCategory>();
+        public List<DanceCompetitionCategory> DanceCompetitionCategories { get; set; }
         public string City { get; set; }
         public string EmailAdress { get; set; }
         public DateTime Date { get; set; }

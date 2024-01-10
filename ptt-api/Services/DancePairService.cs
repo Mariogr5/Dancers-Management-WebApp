@@ -38,7 +38,7 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dance Pair not found");
             if (dancecompetitioncategor is null)
                 throw new NotFoundException("Category not found");
-            dancepair.DanceCompetitionCategoryId = dancecompetitioncategor.Id;
+            //dancepair.DanceCompetitionCategoryId = dancecompetitioncategor.Id;
             _dancersDbContext.Update(dancepair);
             _dancersDbContext.SaveChanges();
         }

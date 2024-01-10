@@ -286,20 +286,19 @@ namespace ptt_api.Migrations
 
             modelBuilder.Entity("ptt_api.Entities.DanceCompetitionCategory", b =>
                 {
-                    b.HasOne("ptt_api.Entities.DanceEvent", "DanceEvent")
+                    b.HasOne("ptt_api.Entities.DanceEvent", null)
                         .WithMany("DanceCompetitionCategories")
                         .HasForeignKey("DanceEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("DanceEvent");
                 });
 
             modelBuilder.Entity("ptt_api.Entities.DancePair", b =>
                 {
                     b.HasOne("ptt_api.Entities.DanceCompetitionCategory", "DanceCompetitionCategory")
                         .WithMany("ListofPairs")
-                        .HasForeignKey("DanceCompetitionCategoryId");
+                        .HasForeignKey("DanceCompetitionCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("DanceCompetitionCategory");
                 });

@@ -34,6 +34,7 @@ namespace ptt_api.Services
             var danceEvent = _dbContext
                 .DanceEvents
                 .Include(r => r.DanceCompetitionCategories)
+                    .ThenInclude(r => r.ListofPairs)
                 .FirstOrDefault(x => x.Id == id);
             if (danceEvent is null)
                 throw new NotFoundException("Dance Event not found");
@@ -44,6 +45,17 @@ namespace ptt_api.Services
         public int CreateDanceEvent(CreateDanceEventDto dto)
         {
             var newDanceEvent = _mapper.Map<DanceEvent>(dto);
+            //newDanceEvent.DanceCompetitionCategories = new List<DanceCompetitionCategory>()
+            //{ new DanceCompetitionCategory()
+            //    {
+            //        AgeRange = "14-15",
+            //        CategoryDanceClass = "B",
+            //        ListofPairs = new List<DancePair>()
+            //                    {
+            //                        new DancePair("Jaś Fasole","Zosia Kłosia","B",0,"Oborniki Wrocław")
+            //                    }
+            //    }
+            //};
             _dbContext.Add(newDanceEvent);
             _dbContext.SaveChanges();
             return newDanceEvent.Id;
