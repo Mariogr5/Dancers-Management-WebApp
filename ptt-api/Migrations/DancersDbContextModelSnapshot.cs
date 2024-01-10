@@ -147,6 +147,9 @@ namespace ptt_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DanceClubId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DanceCompetitionCategoryId")
                         .HasColumnType("int");
 
@@ -199,6 +202,9 @@ namespace ptt_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DanceClubId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DancePartnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("DancePartnerName")

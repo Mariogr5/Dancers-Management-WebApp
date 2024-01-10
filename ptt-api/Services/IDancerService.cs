@@ -10,7 +10,6 @@ namespace ptt_api.Services
         IEnumerable<DancerDto> GetDancersByClubId(int DanceClubId);
         int CreateDancer(int DanceClubId, CreateDancerDto dto);
         void Delete(int id);
-        void PairtheDancers(int id, int PartnerId);
         void ChangeDancerClub(int id, int danceClubId);
     }
 }

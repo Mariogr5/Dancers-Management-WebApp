@@ -133,6 +133,7 @@ namespace ptt_api.Migrations
                     NumberofPoints = table.Column<int>(type: "int", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DancePartnerId = table.Column<int>(type: "int", nullable: true),
                     DancePartnerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DanceClubId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -160,6 +161,7 @@ namespace ptt_api.Migrations
                     PairDanceClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PairNumberofPoints = table.Column<int>(type: "int", nullable: false),
                     DancePairClubName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DanceClubId = table.Column<int>(type: "int", nullable: false),
                     DanceCompetitionCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

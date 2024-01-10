@@ -8,6 +8,7 @@
         public int NumberofPoints { get; set; }
         public string ContactNumber { get; set; }
         public string ContactEmail { get; set; }
+        public int? DancePartnerId { get; set; }
         public string DancePartnerName { get; set; }
         public int DanceClubId { get; set; }
         public virtual DanceClub DancerClub{get;set;}

@@ -6,5 +6,6 @@ namespace ptt_api.Services
     {
         IEnumerable<DancePairDto> GetAll();
         void AddDancePairToDanceCompetitionCategory(int dancecompetitioncategoryid, int dancepairid);
+        int PairtheDancers(int id, int partnerid, CreateDancePairDto dto);
     }
 }

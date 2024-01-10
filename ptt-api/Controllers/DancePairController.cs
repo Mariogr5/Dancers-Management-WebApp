@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ptt_api.Models;
 using ptt_api.Services;
 
 namespace ptt_api.Controllers
@@ -25,6 +26,13 @@ namespace ptt_api.Controllers
         public ActionResult AddDancePairToDanceCompetitionCategory([FromRoute] int dancecompetitioncategoryid, [FromRoute] int dancepairid)
         {
             _dancepairservice.AddDancePairToDanceCompetitionCategory(dancecompetitioncategoryid, dancepairid);
+            return Ok();
+        }
+
+        [HttpPost("{id}/partner/{dancepartnerid}")]
+        public ActionResult PairtheDancers([FromRoute]int id, [FromRoute]int dancepartnerid, [FromBody]CreateDancePairDto dto)
+        {
+            var newdancepair = _dancepairservice.PairtheDancers(id, dancepartnerid, dto);
             return Ok();
         }
     }

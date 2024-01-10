@@ -28,6 +28,8 @@ namespace ptt_api
             CreateMap<CreateDanceEventDto, DanceEvent>();
             CreateMap<DanceEvent, DanceEventDto>();
 
+            CreateMap<CreateDancePairDto, DancePair>();
+            CreateMap<CreateCategoryDto, DanceCompetitionCategory>();
             CreateMap<DanceCompetitionCategory, DanceCompetitionCategoryDto>();
             CreateMap<DancePair, DancePairDto>();
         }

@@ -12,7 +12,7 @@ using ptt_api.Entities;
 namespace ptt_api.Migrations
 {
     [DbContext(typeof(DancersDbContext))]
-    [Migration("20240110193829_Initial")]
+    [Migration("20240110232414_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -150,6 +150,9 @@ namespace ptt_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DanceClubId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DanceCompetitionCategoryId")
                         .HasColumnType("int");
 
@@ -202,6 +205,9 @@ namespace ptt_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DanceClubId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DancePartnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("DancePartnerName")

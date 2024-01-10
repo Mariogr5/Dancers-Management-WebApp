@@ -35,6 +35,7 @@ namespace ptt_api.Controllers
         }
         [HttpPost("danceclub/{DanceClubId}")]
         [Authorize(Roles = "Trainer,Admin")]
+        //[AllowAnonymous]
         public ActionResult CreateDancer([FromRoute]int DanceClubId, [FromBody]CreateDancerDto dto)
         {
             var createdDancerId = _dancerService.CreateDancer(DanceClubId,dto);
@@ -46,14 +47,6 @@ namespace ptt_api.Controllers
         {
             _dancerService.Delete(id);
             return Ok();
-        }
-        [HttpPut("{id}/dancepartner/{PartnerId}")]
-        [HttpPost]
-        //[Authorize(Roles = "Trainer,Admin")]
-        public ActionResult PairtheDancers(int id, int PartnerId)
-        {
-            _dancerService.PairtheDancers(id, PartnerId);
-            return Ok("Done");
         }
         [HttpPut("{id}/newclub/{danceClubId}")]
         [Authorize(Roles = "Trainer,Admin")]

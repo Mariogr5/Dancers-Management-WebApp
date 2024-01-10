@@ -38,9 +38,55 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dance Pair not found");
             if (dancecompetitioncategor is null)
                 throw new NotFoundException("Category not found");
-            //dancepair.DanceCompetitionCategoryId = dancecompetitioncategor.Id;
+            dancepair.DanceCompetitionCategoryId = dancecompetitioncategor.Id;
             _dancersDbContext.Update(dancepair);
             _dancersDbContext.SaveChanges();
+        }
+
+        public int PairtheDancers(int id, int partnerid, CreateDancePairDto dto)
+        {
+            //new DancePair("Jaś Fasola", "Zosia Kłosia", "B", 0, "Oborniki Wrocław")
+            using (var transaction = _dancersDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var dancer = _dancersDbContext.Dancers.FirstOrDefault(r => r.Id == id);
+                    var dancepartner = _dancersDbContext.Dancers.FirstOrDefault(r => r.Id == partnerid);
+                    if(dancepartner is null || dancer is null)
+                        throw new NotFoundException("Dancers not found");
+                    if (dancer.DanceClubId != dancepartner.DanceClubId)
+                        throw new BadRequestException("Dancers are from diffrent Clubs. First change Dance Partner Club");
+                    if(dancer.DancePartnerId == dancepartner.Id || dancer.DancePartnerId != null || dancepartner.DancePartnerId != null)
+                        throw new BadRequestException("Dancers are already in the pair");
+                    var dancerclub = _dancersDbContext.DanceClubs.FirstOrDefault(r => r.Id == dancer.DanceClubId);
+                    dancer.DancePartnerName = dancepartner.Name;
+                    dancer.DancePartnerId = dancepartner.Id;
+                    dancepartner.DancePartnerName = dancer.Name;
+                    dancepartner.DancePartnerId = dancer.Id;
+                    _dancersDbContext.SaveChanges();
+                    var newdancepair = _danceClubMappingProfile.Map<DancePair>(dto);
+                    newdancepair.DancerId = id;
+                    newdancepair.DancePartnerId = partnerid;
+                    newdancepair.DancePairClubName = dancerclub.Name;
+                    newdancepair.DanceClubId = dancerclub.Id;
+                    newdancepair.DancerName = dancer.Name;
+                    newdancepair.DancePartnerName = dancepartner.Name;
+                    newdancepair.DanceCompetitionCategoryId = null;
+                    newdancepair.DanceCompetitionCategory = null;
+
+                    _dancersDbContext.Add(newdancepair);
+                    _dancersDbContext.SaveChanges();
+
+                    transaction.Commit();
+                    return newdancepair.Id;
+                }
+                catch(Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new BadRequestException(ex.Message);
+                }
+            }
+            
         }
     }
 }

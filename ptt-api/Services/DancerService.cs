@@ -54,6 +54,7 @@ namespace ptt_api.Services
         public int CreateDancer(int DanceClubId, CreateDancerDto dto)
         {
             var newDancer = _danceClubMappingProfile.Map<Dancer>(dto);
+            newDancer.DancePartnerId = null;
             newDancer.DancePartnerName = "none";
             newDancer.NumberofPoints = 0;
             newDancer.DanceClubId = DanceClubId;
@@ -70,35 +71,6 @@ namespace ptt_api.Services
             if(deletedDancer is null)
                 throw new NotFoundException("Dancer not found");
             _dancersDbContext.Dancers.Remove(deletedDancer);
-            _dancersDbContext.SaveChanges();
-        }
-
-        public void PairtheDancers(int id, int PartnerId)
-        {
-            var dancer = _dancersDbContext
-                .Dancers
-                .FirstOrDefault(r => r.Id == id);
-            if (dancer is null)
-                throw new NotFoundException("Dancer not found");
-            var dancePartner = _dancersDbContext
-                .Dancers
-                .FirstOrDefault(r => r.Id == PartnerId);
-            if (dancePartner is null)
-                throw new NotFoundException("Dancepartner not found");
-            dancer.DancePartnerName = dancePartner.Name;
-            dancePartner.DancePartnerName = dancer.Name;
-            //DancePair newPair;
-           // var newPair = new DancePair()
-           // {
-           //     DancePairClubName = dancer.DancerClub.Name,
-           //     DancePartnerName = dancePartner.Name,
-           //     PairDanceClass = dancer.Danceclass,
-           //     PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints),
-           //     DancerName = dancer.Name,
-           // };
-            _dancersDbContext.Update(dancer);
-            _dancersDbContext.Update(dancePartner);
-            //_dancersDbContext.DancePairs.Add(new DancePair() { DancePairClubName = dancer.DancerClub.Name, DancePartnerName = dancePartner.Name, PairDanceClass = dancer.Danceclass, PairNumberofPoints = (dancer.NumberofPoints + dancePartner.NumberofPoints), DancerName = dancer.Name});
             _dancersDbContext.SaveChanges();
         }
         public void ChangeDancerClub(int id, int danceClubId)

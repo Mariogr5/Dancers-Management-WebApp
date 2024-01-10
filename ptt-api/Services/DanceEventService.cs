@@ -45,21 +45,25 @@ namespace ptt_api.Services
         public int CreateDanceEvent(CreateDanceEventDto dto)
         {
             var newDanceEvent = _mapper.Map<DanceEvent>(dto);
-            //newDanceEvent.DanceCompetitionCategories = new List<DanceCompetitionCategory>()
-            //{ new DanceCompetitionCategory()
-            //    {
-            //        AgeRange = "14-15",
-            //        CategoryDanceClass = "B",
-            //        ListofPairs = new List<DancePair>()
-            //                    {
-            //                        new DancePair("Jaś Fasole","Zosia Kłosia","B",0,"Oborniki Wrocław")
-            //                    }
-            //    }
-            //};
             _dbContext.Add(newDanceEvent);
             _dbContext.SaveChanges();
             return newDanceEvent.Id;
         }
+
+
+        public int CreateDanceCategory(int eventid, CreateCategoryDto dto)
+        {
+            var danceevent = _dbContext.DanceEvents.FirstOrDefault(r => r.Id == eventid);
+            if (danceevent is null)
+                throw new BadRequestException("Event not found");
+            var newcategory = _mapper.Map<DanceCompetitionCategory>(dto);
+            newcategory.DanceEventId = danceevent.Id;
+            newcategory.ListofPairs = new List<DancePair>();
+            _dbContext.DanceCompetitionCategories.Add(newcategory);
+            _dbContext.SaveChanges();
+            return danceevent.Id;
+        }
+
 
         public void DeleteDanceEvent(int id)
         {
