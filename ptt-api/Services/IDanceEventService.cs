@@ -9,5 +9,6 @@ namespace ptt_api.Services
         int CreateDanceEvent(CreateDanceEventDto dto);
         void DeleteDanceEvent(int id);
         int CreateDanceCategory(int eventid, CreateCategoryDto dto);
+        void DeleteDanceCategory(int categoryid);
     }
 }

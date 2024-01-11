@@ -64,6 +64,14 @@ namespace ptt_api.Services
             return danceevent.Id;
         }
 
+        public void DeleteDanceCategory(int categoryid)
+        {
+            var dancecategory = _dbContext.DanceCompetitionCategories.FirstOrDefault(r => r.Id == categoryid);
+            if (dancecategory is null)
+                throw new NotFoundException("Category not found");
+            _dbContext.DanceCompetitionCategories.Remove(dancecategory);
+            _dbContext.SaveChanges();
+        }
 
         public void DeleteDanceEvent(int id)
         {

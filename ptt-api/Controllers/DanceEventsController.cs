@@ -42,6 +42,13 @@ namespace ptt_api.Controllers
             var newcategoryId = _danceEventService.CreateDanceCategory(eventid, dto);
             return Created($"danceevent/{newcategoryId}", null);
         }
+        [HttpDelete("category/{categoryid}")]
+        [AllowAnonymous]
+        public ActionResult DeleteDanceCategory(int categoryid)
+        {
+            _danceEventService.DeleteDanceCategory(categoryid);
+            return Ok();
+        }
         [HttpDelete("{id}")]
         //[Authorize(Roles = "Trainer,Admin")]
         public ActionResult DeleteDanceEvent([FromRoute]int id)

@@ -33,6 +33,12 @@ namespace ptt_api.Controllers
             var searchedDancers = _dancerService.GetDancersByClubId(DanceClubId);
             return Ok(searchedDancers);
         }
+        [HttpGet("danceclass/{danceclass}")]
+        public ActionResult GetDancersByDanceClass([FromRoute] string danceclass)
+        {
+            var searchedDancers = _dancerService.GetDancersByDanceClass(danceclass);
+            return Ok(searchedDancers);
+        }
         [HttpPost("danceclub/{DanceClubId}")]
         [Authorize(Roles = "Trainer,Admin")]
         //[AllowAnonymous]

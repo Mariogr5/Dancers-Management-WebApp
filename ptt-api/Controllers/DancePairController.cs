@@ -22,6 +22,13 @@ namespace ptt_api.Controllers
             return Ok(alldancepairs);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult GetPairById(int id)
+        {
+            var pair = _dancepairservice.GetPairById(id);
+            return Ok(pair);
+        }
+
         [HttpPut("{dancepairid}/competition/{dancecompetitioncategoryid}")]
         public ActionResult AddDancePairToDanceCompetitionCategory([FromRoute] int dancecompetitioncategoryid, [FromRoute] int dancepairid)
         {
@@ -33,6 +40,13 @@ namespace ptt_api.Controllers
         public ActionResult PairtheDancers([FromRoute]int id, [FromRoute]int dancepartnerid, [FromBody]CreateDancePairDto dto)
         {
             var newdancepair = _dancepairservice.PairtheDancers(id, dancepartnerid, dto);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeletePair([FromRoute]int id)
+        {
+            _dancepairservice.DeletePair(id);
             return Ok();
         }
     }

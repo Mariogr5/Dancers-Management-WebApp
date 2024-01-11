@@ -51,6 +51,18 @@ namespace ptt_api.Services
             var searchedDancersDto = _danceClubMappingProfile.Map<IEnumerable<DancerDto>>(searchedDancers);
             return searchedDancersDto;
         }
+
+        public IEnumerable<DancerDto> GetDancersByDanceClass(string danceclass)
+        {
+            var searchedDancers = _dancersDbContext
+                .Dancers
+                .Where(r => r.Danceclass == danceclass)
+                .ToList();
+            if (!searchedDancers.Any())
+                throw new NotFoundException("Searched DanceClass Dancers not found");
+            var searchedDancersDto = _danceClubMappingProfile.Map<IEnumerable<DancerDto>>(searchedDancers);
+            return searchedDancersDto;
+        }
         public int CreateDancer(int DanceClubId, CreateDancerDto dto)
         {
             var newDancer = _danceClubMappingProfile.Map<Dancer>(dto);

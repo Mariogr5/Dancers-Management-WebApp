@@ -26,6 +26,15 @@ namespace ptt_api.Services
             return allDancersDto;
         }
 
+        public DancePairDto GetPairById(int id)
+        {
+            var searchedpair = _dancersDbContext.DancePairs.FirstOrDefault(r => r.Id == id);
+            if (searchedpair is null)
+                throw new NotFoundException("Pair not found");
+            var result = _danceClubMappingProfile.Map<DancePairDto>(searchedpair);
+            return result;
+        }
+
         public void AddDancePairToDanceCompetitionCategory(int dancecompetitioncategoryid, int dancepairid)
         {
             var dancecompetitioncategor = _dancersDbContext
@@ -38,6 +47,8 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dance Pair not found");
             if (dancecompetitioncategor is null)
                 throw new NotFoundException("Category not found");
+            if (dancepair.PairDanceClass != dancecompetitioncategor.CategoryDanceClass)
+                throw new BadRequestException("Dance Pair and Category have diffrent Dance Class!");
             dancepair.DanceCompetitionCategoryId = dancecompetitioncategor.Id;
             _dancersDbContext.Update(dancepair);
             _dancersDbContext.SaveChanges();
@@ -87,6 +98,21 @@ namespace ptt_api.Services
                 }
             }
             
+        }
+
+        public void DeletePair(int id)
+        {
+            var deletedpair = _dancersDbContext.DancePairs.FirstOrDefault(r => r.Id == id);
+            if (deletedpair is null)
+                throw new NotFoundException("Dance Pair not found");
+            var dancer = _dancersDbContext.Dancers.FirstOrDefault(r => r.Id == deletedpair.DancerId);
+            var dancepartner = _dancersDbContext.Dancers.FirstOrDefault(r => r.Id == deletedpair.DancePartnerId);
+            dancer.DancePartnerId = null;
+            dancer.DancePartnerName = "none";
+            dancepartner.DancePartnerId = null;
+            dancepartner.DancePartnerName = "none";
+            _dancersDbContext.Remove(deletedpair);
+            _dancersDbContext.SaveChanges();
         }
     }
 }
