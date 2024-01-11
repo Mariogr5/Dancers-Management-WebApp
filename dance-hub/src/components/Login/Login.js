@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css';
-import { Navigate } from 'react-router-dom';
 
 export function Login({ setToken }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,10 +29,19 @@ export function Login({ setToken }) {
       } else {
         // Obsłuż błąd logowania, na przykład wyświetl komunikat o błędzie
         console.error('Błąd logowania');
+        setIsInvalid(true);
       }
     } catch (error) {
-      console.error('Wystąpił błąd:', error);
+      console.error('Wystąpił błąd');
+      setIsInvalid(true);
     }
+  };
+
+  const getInputClassName = (field) => {
+    if (isInvalid){
+      return 'form-control is-invalid';
+    }
+    return 'form-control';
   };
 
   return (
@@ -44,13 +53,14 @@ export function Login({ setToken }) {
           <div className="row">
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="form-floating">
-                <input type="email" className="form-control" id="floatingInputGridEmail" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <input type="email" className={getInputClassName('email')} id="floatingInputGridEmail" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <label>Adres email</label>
+                <div className='invalid-feedback'>Niepoprawny email lub hasło</div>
               </div>
             </div>
             <div className="col-lg-6 col-md-6 mb-4">
               <div className="form-floating">
-                <input type="password" className="form-control" id="floatingInputGridPassword" placeholder="" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input type="password" className={getInputClassName('password')} id="floatingInputGridPassword" placeholder="" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <label>Hasło</label>
               </div>
             </div>
@@ -66,7 +76,7 @@ export function Login({ setToken }) {
 }
 
 export function LoggedIn() {
-  window.location.href="/dashboard";
+  window.location.href="/";
 }
 
 Login.propTypes = {

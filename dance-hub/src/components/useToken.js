@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const FIVE_DAYS_IN_MS = 5 * 24 * 60 * 60 * 1000; // 5 dni w milisekundach
 
