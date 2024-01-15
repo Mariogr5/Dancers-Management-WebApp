@@ -12,6 +12,7 @@ export default function Navbar() {
         { to: '/dashboard', label: 'Wydarzenia' },
         { to: '/dancers', label: 'Tancerze' },
         { to: '/clubs', label: 'Kluby' },
+        { to: '/pairs', label: 'Pary' },
     ];
 
     if (token) {
@@ -42,23 +43,27 @@ export default function Navbar() {
                     </button>
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i class="fa-regular fa-user"></i> Profil użytkownika</h5>
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i class="fa-regular fa-user"></i> Administrator</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <li class="nav-item">
-                                    <p class="nav-link active">Imie: </p>
+                                    <a href={`/eventAdd`} className="btn btn-outline-primary m-2">Utwórz wydarzenie</a>
                                 </li>
                                 <li class="nav-item">
-                                    <p class="nav-link active">Nazwisko: </p>
+                                    <a href={`/dancerAdd`} className="btn btn-outline-primary m-2">Utwórz tancerza</a>
                                 </li>
                                 <li class="nav-item">
-                                    <p class="nav-link active">Adres Email: </p>
+                                    <a href={`/pairAdd`} className="btn btn-outline-primary m-2">Utwórz parę</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href={`/clubAdd`} className="btn btn-outline-primary m-2">Utwórz klub</a>
+                                </li>
+                                <li class="nav-item">
+                                <button class="btn btn-outline-danger m-2" type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" onClick={() => { logout(); }}>Wyloguj</button>
                                 </li>
                             </ul>
-                            <button class="btn btn-outline-primary m-2" type="submit">Ustawienia</button>
-                            <button class="btn btn-outline-danger" type="submit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" onClick={() => { logout(); }}>Wyloguj</button>
                         </div>
                     </div>
                 </div>

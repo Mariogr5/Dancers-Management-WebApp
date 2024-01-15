@@ -41,6 +41,7 @@ export default function useToken() {
     localStorage.removeItem('token');
     setToken(null);
     stopAutoLogout();
+    window.location.href = `/`;
   };
 
   useEffect(() => {

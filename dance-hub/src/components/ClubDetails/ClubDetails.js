@@ -27,22 +27,6 @@ export default function ClubDetails() {
                     <h2><i class="fa-solid fa-users"></i> Tancerze w klubie <strong>{club.name}</strong></h2>
                 </div>
             </div>
-            <div className='d-flex justify-content-center mt-3'>
-                <div class="accordion col-lg-8 col-md-10 col-sm-11 col-11" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Filtr wyszukiwania
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <p>filtry</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div className='d-flex justify-content-center mt-5'>
                 <div className='col-lg-8 col-md-10 col-sm-11 col-11 text-left'>
                     <table class="table table-primary table-striped table-hover table-borderless">

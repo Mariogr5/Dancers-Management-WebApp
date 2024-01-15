@@ -1,0 +1,16 @@
+.pointer{
+    cursor: pointer;
+}
+
+.mt-100{
+    margin-top: 100px;
+}
+
+.mt-50{
+    margin-top: 50px;
+}
+
+.fa-person-circle-plus{
+    font-size: 40px;
+    color: #0d6efd;
+}

@@ -1,0 +1,22 @@
+.pointer{
+    cursor: pointer;
+}
+
+.accordion-body{
+    border-radius: 5px;
+    padding: 5px;
+    width: 70%;
+}
+
+.accordion-collapse{
+    width: 70%;
+}
+
+.mt-100{
+    margin-top: 100px;
+}
+
+.pairlink{
+    text-decoration: none;
+    color: black;
+}
