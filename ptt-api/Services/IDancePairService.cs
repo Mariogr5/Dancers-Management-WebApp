@@ -8,7 +8,7 @@ namespace ptt_api.Services
         DancePairDto GetPairById(int id);
         void AddDancePairToDanceCompetitionCategory(int dancecompetitioncategoryid, int dancepairid);
         int PairtheDancers(int id, int partnerid, CreateDancePairDto dto);
-
+        DancePairDto GetPairByDancerId(int dancerid);
         void DeletePair(int id);
     }
 }

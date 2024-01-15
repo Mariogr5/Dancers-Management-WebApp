@@ -44,6 +44,7 @@ namespace ptt_api.Services
         {
             var searchedDancers = _dancersDbContext
                 .Dancers
+                .Include(r => r.DancerClub)
                 .Where(r => r.DancerClub.Id == DanceClubId)
                 .ToList();
             if (!searchedDancers.Any())
@@ -56,6 +57,7 @@ namespace ptt_api.Services
         {
             var searchedDancers = _dancersDbContext
                 .Dancers
+                .Include(r => r.DancerClub)
                 .Where(r => r.Danceclass == danceclass)
                 .ToList();
             if (!searchedDancers.Any())
@@ -82,6 +84,10 @@ namespace ptt_api.Services
                 .FirstOrDefault(r =>r.Id == id);
             if(deletedDancer is null)
                 throw new NotFoundException("Dancer not found");
+            var deletedDancerPair = _dancersDbContext
+                .DancePairs
+                .Where(r => r.DancerId == deletedDancer.Id || r.DancerId == deletedDancer.DancePartnerId)
+                .FirstOrDefault();
             _dancersDbContext.Dancers.Remove(deletedDancer);
             _dancersDbContext.SaveChanges();
         }

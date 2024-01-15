@@ -10,10 +10,11 @@ namespace ptt_api.Controllers
     public class DancerController : ControllerBase
     {
         private readonly IDancerService _dancerService;
-
-        public DancerController(IDancerService dancerService)
+        private readonly IDancePairService _dancePairService;
+        public DancerController(IDancerService dancerService, IDancePairService dancePairService)
         {
             _dancerService = dancerService;
+            _dancePairService = dancePairService;
         }
         [HttpGet]
         public ActionResult GetAllDancers()
@@ -51,6 +52,8 @@ namespace ptt_api.Controllers
         [Authorize(Roles = "Trainer,Admin")]
         public ActionResult DeleteDancer([FromRoute]int id)
         {
+            var deletedDancePair = _dancePairService.GetPairByDancerId(id);
+            _dancePairService.DeletePair(deletedDancePair.Id);
             _dancerService.Delete(id);
             return Ok();
         }

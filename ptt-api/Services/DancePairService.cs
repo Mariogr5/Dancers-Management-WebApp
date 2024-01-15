@@ -25,7 +25,14 @@ namespace ptt_api.Services
             var allDancersDto = _danceClubMappingProfile.Map<IEnumerable<DancePairDto>>(allDancers);
             return allDancersDto;
         }
-
+        public DancePairDto GetPairByDancerId(int dancerid)
+        {
+            var searchedpair = _dancersDbContext.DancePairs.FirstOrDefault(r => r.DancerId == dancerid || r.DancePartnerId == dancerid);
+            if (searchedpair is null)
+                throw new NotFoundException("Pair not found");
+            var result = _danceClubMappingProfile.Map<DancePairDto>(searchedpair);
+            return result;
+        }
         public DancePairDto GetPairById(int id)
         {
             var searchedpair = _dancersDbContext.DancePairs.FirstOrDefault(r => r.Id == id);
