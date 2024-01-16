@@ -103,7 +103,7 @@ namespace ptt_api.Services
                 throw new NotFoundException("Dancer not found");
             if (danceclub is null)
                 throw new NotFoundException("Dance Club not found");
-            if (dancer.DancePartnerName != null)
+            if (dancer.DancePartnerName != "none")
             {
                 var dancePartner = _dancersDbContext
                     .Dancers
@@ -113,6 +113,7 @@ namespace ptt_api.Services
                 _dancersDbContext.Update(dancePartner);
             }
             dancer.DanceClubId = danceClubId;
+            dancer.DancerClub = danceclub;
             _dancersDbContext.Update(dancer);
             _dancersDbContext.SaveChanges();
         }

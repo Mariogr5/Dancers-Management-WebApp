@@ -103,9 +103,7 @@ namespace ptt_api
                             AgeRange = "14-15",
                             CategoryDanceClass = "B",
                             ListofPairs = new List<DancePair>()
-                            {
-                                new DancePair("Jaś Fasola","Zosia Kłosia","B",0,"Oborniki Wrocław")
-                            }
+                            
                         }
                     }
 
@@ -125,9 +123,7 @@ namespace ptt_api
                             AgeRange = "14-15",
                             CategoryDanceClass = "B",
                             ListofPairs = new List<DancePair>()
-                            {
-                                new DancePair("Jaś Fasole","Zosia Kłosia","B",0,"Oborniki Wrocław")
-                            }
+                            
                         }
                     }
 

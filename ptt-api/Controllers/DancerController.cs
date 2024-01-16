@@ -52,10 +52,18 @@ namespace ptt_api.Controllers
         [Authorize(Roles = "Trainer,Admin")]
         public ActionResult DeleteDancer([FromRoute]int id)
         {
-            var deletedDancePair = _dancePairService.GetPairByDancerId(id);
-            _dancePairService.DeletePair(deletedDancePair.Id);
-            _dancerService.Delete(id);
-            return Ok();
+            try
+            {
+                var deletedDancePair = _dancePairService.GetPairByDancerId(id);
+                _dancePairService.DeletePair(deletedDancePair.Id);
+                _dancerService.Delete(id);
+                return Ok();
+           }
+           catch
+           {
+             _dancerService.Delete(id);
+             return Ok();
+           }
         }
         [HttpPut("{id}/newclub/{danceClubId}")]
         [Authorize(Roles = "Trainer,Admin")]
